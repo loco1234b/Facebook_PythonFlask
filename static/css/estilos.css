@@ -1,0 +1,993 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 1rem;
+    margin: 2rem;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4267B2;
+    padding: 0.5rem 1rem; /* Reduce el padding para hacerla más corta */
+    color: white;
+    height: 60px; /* Fija una altura estándar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Agrega un poco de sombra para destacar */
+}
+
+.navbar-left .logo {
+    height: 40px; /* Ajusta el tamaño del logo */
+}
+
+.navbar .search-box {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 0.3rem 0.7rem; 
+    border-radius: 20px;
+    max-width: 200px; 
+    overflow: hidden;
+    margin-top: -30px;
+    margin-left: 50px;
+}
+
+.navbar .search-box input {
+    border: none;
+    outline: none;
+    margin-left: 0.5rem;
+    font-size: 0.9rem; /* Reduce el tamaño del texto */
+}
+
+.navbar-center .nav-icon {
+    margin: 0 0.7rem; 
+    color: white;
+    font-size: 1.4rem; 
+    transition: color 0.3s, transform 0.3s;
+}
+
+.navbar-center .nav-icon:hover {
+    color: #ddd; /* Cambia el color al pasar el ratón */
+    transform: scale(1.1); /* Efecto de ampliación */
+}
+
+.navbar-right .fa-solid,
+.navbar-right .fa-brands {
+    margin: 0 0.7rem;
+    font-size: 1.3rem; /* Ajusta el tamaño de los íconos de la derecha */
+    cursor: pointer;
+}
+
+.navbar-right .profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%; /* Hace que la imagen de perfil sea circular */
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.navbar-right .profile-pic:hover {
+    transform: scale(1.1); /* Efecto de ampliación al pasar el ratón */
+}
+
+.sidebar-left, .sidebar-right {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+/* Navbar */
+.navbar .nav-icon.active {
+    border-bottom: 2px solid white;
+    padding-bottom: 0.2rem;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.menu-item i {
+    font-size: 1.5rem;
+    color: #4267B2;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+.menu-item img {
+    font-size: 1.5rem;
+    width: 30px;
+    height: 30px;
+    margin-right: 1rem;
+}
+
+.post {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.contacts {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+
+.contact-item img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 1rem;
+}
+/* Botones */
+button {
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #4267B2;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Mejorar publicaciones */
+.post {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-header h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.post-header small {
+    color: #888;
+}
+
+.post p {
+    font-size: 1rem;
+    margin: 1rem 0;
+}
+
+.post-actions button {
+    color: #888;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.post-actions button:hover {
+    color: #4267B2;
+}
+
+/* Historias */
+.story-section {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+}
+
+.my-story img,
+.story-section img {
+    width: 70px;  /* Ajusta el tamaño según sea necesario */
+    height: 70px;
+    border-radius: 5px; /* Cambia el border-radius a 5px para que sean cuadradas */
+    border: 3px solid #4267B2;
+    transition: transform 0.3s ease;
+}
+
+.my-story img:hover {
+    transform: scale(1.1);
+}
+
+/* Crear publicaciones */
+.create-post {
+    background: #f7f7f7;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 1.5rem;
+}
+
+.create-post input {
+    border: 1px solid #ccc;
+    padding: 0.8rem;
+    border-radius: 20px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.post-options button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Estilo general para las publicaciones */
+.feed {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.post-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Mantén el círculo en la foto de perfil */
+}
+
+.post-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.post-actions button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: #4267B2;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.post-actions button:hover {
+    color: #1877f2;
+}
+
+/* Crear publicaciones */
+.create-post {
+    background: #f7f7f7;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 1.5rem;
+}
+
+.create-post input {
+    border: 1px solid #ccc;
+    padding: 0.8rem;
+    border-radius: 20px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.post-options button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Contactos */
+.contact-item img {
+    position: relative;
+    border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contact-item::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+    position: absolute;
+    right: 50px;
+}
+
+/* Patrocinado */
+.sponsored .ad img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Hover para íconos del feed */
+.nav-icon:hover {
+    color: #ddd;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    padding: 0.5rem;
+}
+
+.card-profile{
+    position: absolute;
+    top: 10%;
+    right: 20px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.5s ;
+}
+.open-menu{
+    max-height: 500px;
+
+}
+.menu{
+    width: 330px;
+    background: rgb(235, 221, 221);
+    border-radius: 7px;
+    padding: 14px;
+}
+.profile-menu{
+    display: flex;
+    align-items: center;
+    background: rgb(173, 166, 166);
+    box-shadow: 2px 0 5px rgb(0, 0, 0,0);
+    border-radius: 8px;
+    padding: 12px 0;
+    margin-bottom: 15px;
+}
+.profile-menu p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    font-weight: 550;
+}
+.card-menu{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    background: rgb(255, 255, 255);
+    border-radius: 8px;
+    padding: 5px 0;
+    color: black;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+.card-menu:hover{
+    background: rgb(199, 199, 199);
+}
+.card-menu p{
+    width: 100%;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.card-menu span{
+    font-size: 22px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.card-menu img{
+    width: 40px;
+    background: white;
+    padding: 8px;
+    margin-right: 15px;
+    border-radius: 50%;
+}
+/* Botón base */
+.solicitud-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    
+    
+border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Estilo para el botón de aceptar */
+.solicitud-button.aceptar {
+    background-color: #4CAF50; 
+    color: white;
+}
+
+.solicitud-button.aceptar:hover {
+    background-color: #45a049; 
+    transform: scale(1.05);
+}
+
+.solicitud-button.rechazar {
+    background-color: #F44336;
+    color: white;
+}
+
+.solicitud-button.rechazar:hover {
+    background-color: #d32f2f; 
+    transform: scale(1.05);
+}
+
+.solicitud-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #444;
+}
+
+/* Contacts section */
+.contacts1 {
+    max-width: 600px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.contacts-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-item1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease;
+}
+
+.contact-item1:last-child {
+    border-bottom: none;
+}
+
+.contact-item1:hover {
+    background-color: #f9f9f9;
+}
+
+.contact-info p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+}
+
+.contact-link {
+    text-decoration: none;
+    font-size: 14px;
+    color: #007bff;
+    padding: 8px 12px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+.container1 {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    background-color: #f0f2f5;
+    padding: 1rem;
+}
+
+/* Sidebar izquierdo */
+.sidebar-left1 {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.menu-section1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.menu-item1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #444;
+    cursor: pointer;
+}
+
+.menu-item1 img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* Área principal */
+.main-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.main-content h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1877f2;
+}
+
+.main-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.main-content li {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.solicitud-actions button {
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.solicitud-button.aceptar {
+    background-color: #42b72a;
+    color: #fff;
+}
+
+.solicitud-button.rechazar {
+    background-color: #f02849;
+    color: #fff;
+}
+
+/* Sidebar derecho */
+.sidebar-right {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-right h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+.sidebar-right ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-right li {
+    margin-bottom: 1rem;
+}
+
+.sidebar-right button {
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+/* Estilo general del contenedor */
+.container2 {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* Sidebar ocupa 1 parte, el contenido 3 partes */
+    gap: 20px;
+    padding: 20px;
+    background-color: #f0f2f5;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar izquierda */
+.sidebar-left2 {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-section2 {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-item2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.menu-item2 img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.menu-item2 i {
+    font-size: 20px;
+    color: #1877f2;
+}
+
+.menu-item2 p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.menu-item2:hover {
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Sección central */
+.main-content2 {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main-content2 h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.contacts-list2 {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-item2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f2f5;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.contact-item2 p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.contact-message-link2 {
+    text-decoration: none;
+    color: #1877f2;
+    font-weight: bold;
+}
+
+.contact-message-link2:hover {
+    text-decoration: underline;
+}
+
+.no-friends2 {
+    text-align: center;
+    color: #555;
+    font-size: 16px;
+}
+
+/* Contenedor general */
+.container3 {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* Sidebar y sección principal */
+    gap: 20px;
+    padding: 20px;
+    background-color: #f0f2f5;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar izquierda */
+.sidebar-left3 {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-section3 {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-item3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.menu-item3 img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.menu-item3 i {
+    font-size: 20px;
+    color: #1877f2;
+}
+
+.menu-item3 p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.menu-item3:hover {
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Sección principal */
+.main-content3 {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Chat container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+}
+
+/* Mensajes */
+.messages-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #f0f2f5;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+    margin-bottom: 10px;
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+    position: relative;
+}
+
+.message.sent {
+    background-color: #d1e7ff;
+    margin-left: auto;
+}
+
+.message.received {
+    background-color: #e5e5e5;
+    margin-right: auto;
+}
+
+.timestamp {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+    display: block;
+    text-align: right;
+}
+
+/* Formulario de mensajes */
+.message-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.message-form textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    resize: none;
+    font-size: 14px;
+}
+
+.btn_mensaje {
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn_mensaje:hover {
+    background-color: #145db2;
+}
+
+/* Contenedor principal de historias */
+.story-section {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+/* Botón para añadir historia */
+.add-story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 100px;
+}
+
+.add-story button {
+    width: 60px;
+    height: 60px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.add-story button:hover {
+    transform: scale(1.1);
+}
+
+.add-story p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Carrusel de historias */
+.friend-stories {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+}
+
+.story {
+    min-width: 80px;
+    max-width: 80px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.story img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.story p {
+    font-size: 0.75rem;
+    color: #333;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal-content button {
+    padding: 0.7rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
+
+.close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}

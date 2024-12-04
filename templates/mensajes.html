@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook - solicitudes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-left">
+            <img src="{{ url_for('static', filename='img/logo_facebook.jfif') }}" alt="Facebook Logo" class="logo">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar en Facebook">
+            </div>
+        </div>
+        <div class="navbar-center">
+            <a href="{{ url_for('inicio') }}" class="nav-icon active"><i class="fa-solid fa-house"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-tv"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-store"></i></a>
+            <a href="{{ url_for('solicitudes') }}" class="nav-icon"><i class="fa-solid fa-user"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-gamepad"></i></a>
+        </div>
+        <div class="navbar-right">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-brands fa-facebook-messenger"></i>
+            <i class="fa-solid fa-bell"></i>
+            <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Perfil" class="profile-pic" onclick="opencard()">
+        </div>
+        <div class="card-profile" id="cardwrap">
+            <div class="menu">
+                <div class="profile-menu">
+                <img src="{{ url_for('static', filename='img/logo_facebook.jfif') }}" alt="profile">
+                <p>#</p>
+            </div>
+            </div>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>meta businness suite</p>
+                <span>></span>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>setting y privacy</p>
+                <span>></span>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>help y suporrt</p>
+                <span>></span>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>display and accesibility</p>
+                <span>></span>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>give feedback</p>
+            </a>
+        </div>
+    </header>
+    <main class="container3">
+        <!-- Sidebar izquierda -->
+        <aside class="sidebar-left3">
+            <section class="menu-section3">
+                <div class="menu-item3">
+                    <img src="{{ url_for('static', filename='img/logo_facebook.jfif') }}" alt="usuario">
+                    <p></p>
+                </div>
+                <hr style="width: 100%; border-color: #ddd;">
+                <a href="{{ url_for('amigos') }}" class="menu-item-link" style="text-decoration: none;">
+                    <div class="menu-item3">
+                        <i class="fa-solid fa-user-friends"></i>
+                        <p>Amigos</p>
+                    </div>
+                </a>
+                <div class="menu-item3">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <p>Eventos</p>
+                </div>
+                <div class="menu-item3">
+                    <i class="fa-solid fa-users"></i>
+                    <p>Grupos</p>
+                </div>
+                <div class="menu-item3">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <p>Empleos</p>
+                </div>
+            </section>
+        </aside>
+    
+        <!-- Sección de mensajes -->
+        <section class="main-content3">
+            <h1>Enviar mensaje a {{ amigo['Nombres'] }} {{ amigo['Apellidos'] }}</h1>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% elif success %}
+                <p class="success">{{ success }}</p>
+            {% endif %}
+    
+            <div class="chat-container">
+                <!-- Contenedor de mensajes -->
+                <div class="messages-container">
+                    {% for mensaje in mensajes %}
+                        <div class="message {% if mensaje['emisor'] == session['id'] %}sent{% else %}received{% endif %}">
+                            <p>{{ mensaje['contenido'] }}</p>
+                            <span class="timestamp">{{ mensaje['fecha_hora'] }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+    
+                <!-- Formulario para enviar mensajes -->
+                <form method="POST" class="message-form">
+                    <textarea name="contenido" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                    <button class="btn_mensaje" type="submit">Enviar</button>
+                </form>
+            </div>
+        </section>
+    </main>    
+    <script src="{{ url_for('static', filename='js/cardmenu.js') }}"></script>
+</body>
+</html>

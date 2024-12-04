@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='img/faceboook.ico') }}" rel="shortcut icon" sizes="196x196">
+    <title>¿Has olvidado la contraseña? | No puedo entrar | Facebook</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta_identificada.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <img src="{{ url_for('static', filename='img/facebook-6.png') }}" alt="Logo de Facebook" class="logo">
+        <h2>Cuenta Encontrada</h2>
+        <p>Hemos encontrado tu cuenta asociada a:</p>
+        <p><strong>{{ usuario['Correo'] }}</strong></p>
+        <p>Para restablecer tu contraseña, revisa tu correo electrónico y sigue las instrucciones.</p>
+        <form action="/enviarCorreoRecuperacion" method="post">
+            <input type="hidden" name="correo" value="{{ usuario['Correo'] }}">
+            <button type="submit" class="enviar">Enviar correo de recuperación</button>
+        </form>
+        {% if success %}
+        <p class="success">{{ success }}</p>
+       {% elif error %}
+        <p class="error">{{ error }}</p>
+       {% endif %}
+        <a href="{{ url_for('home') }}" class="link">Regresar a Facebook</a>
+    </div>
+
+</body>
+
+</html>

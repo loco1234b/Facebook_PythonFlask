@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook - Inicio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-left">
+            <img src="{{ url_for('static', filename='img/logo_facebook.jfif') }}" alt="Facebook Logo" class="logo">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar en Facebook">
+            </div>
+        </div>
+        <div class="navbar-center">
+            <a href="#" class="nav-icon active"><i class="fa-solid fa-house"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-tv"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-store"></i></a>
+            <a href="{{ url_for('solicitudes') }}" class="nav-icon"><i class="fa-solid fa-user"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-gamepad"></i></a>
+        </div>
+        <div class="navbar-right">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-brands fa-facebook-messenger"></i>
+            <i class="fa-solid fa-bell"></i>
+            <img src="{{ url_for('static', filename='img/historia_1.jpg') }}" alt="Perfil" class="profile-pic" onclick="opencard()">
+        </div>
+        <div class="card-profile" id="cardwrap">
+            <div class="menu">
+                <div class="profile-menu">
+                <img src="{{ url_for('static', filename='img/logo_facebook.jfif') }}" style="width: 30px;margin-left: 20px; " alt="profile">
+                <p style="margin-left: 10px;">{{ usuario['Nombres'] }} {{ usuario['Apellidos'] }}</p>
+            </div>
+            </div>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>meta businness suite</p>
+                <span>></span>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>setting y privacy</p>
+                <span>></span>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>help y suporrt</p>
+                <span>></span>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>display and accesibility</p>
+                <span>></span>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>give feedback</p>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>logout</p>
+            </a>
+        </div>
+    </header>
+    
+    <main class="container">
+        <aside class="sidebar-left">
+            <section class="menu-section">
+                <div class="menu-item">
+                    <img src="{{ url_for('static', filename='img/logo_facebook.jfif') }}" alt="usuario">
+                    <p>{{ usuario['Nombres'] }} {{ usuario['Apellidos'] }}</p>
+                </div>
+                <hr style="color: black;width: 100%;">
+                <a href="{{ url_for('amigos') }}" class="menu-item-link" style="text-decoration: none;">
+                    <div class="menu-item">
+                        <i class="fa-solid fa-user-friends"></i>
+                        <p style="color: black;">Amigos</p>
+                    </div>
+                </a>
+                <div class="menu-item">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <p>Eventos</p>
+                </div>
+                <div class="menu-item">
+                    <i class="fa-solid fa-users"></i>
+                    <p>Grupos</p>
+                </div>
+                <div class="menu-item">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <p>Empleos</p>
+                </div>
+            </section>
+        </aside>
+        <section class="feed">
+            <section class="story-section">
+                <!-- Botón para añadir historia -->
+                <div class="add-story">
+                    <button id="addStoryBtn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <p>Tu historia</p>
+                </div>
+            
+                <!-- Carrusel de historias de amigos -->
+                <div class="friend-stories">
+                    {% for historia in historias_amigos %}
+                    <div class="story">
+                        <img src="{{ url_for('static', filename=historia['archivo_url']) }}" alt="Historia">
+                        <p>{{ historia['Nombres'] }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+             <!-- Modal para subir historia -->
+        <div id="storyModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form method="POST" action="/add_story" enctype="multipart/form-data">
+                    <label for="archivo">Subir archivo:</label>
+                    <input type="file" id="archivo" name="archivo" accept="image/*,video/*" required>
+                    <textarea name="contenido" placeholder="Añade una descripción (opcional)"></textarea>
+                    <button type="submit">Subir historia</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="create-post">
+            <form action="/publicar" method="POST" enctype="multipart/form-data">
+                <input type="text" name="contenido" placeholder="¿Qué estás pensando?" class="create-post-input">
+                <input type="file" name="foto" accept="image/*">
+                <button type="submit"><i class="fa-solid fa-paper-plane"></i> Publicar</button>
+            </form>
+        </div>
+        
+        <div class="posts">
+            {% for publicacion in publicaciones %}
+            <div class="post">
+                <div class="post-header">
+                    <img src="{{ url_for('static', filename='img/historia_1.jpg') }}" alt="Perfil" class="post-profile-pic">
+                    <div>
+                        <h4>{{ publicacion['Nombres'] }} {{ publicacion['Apellidos'] }}</h4>
+                        <small>{{ publicacion['fecha_publicacion'] }}</small>
+                    </div>
+                </div>
+                {% if publicacion['contenido'] %}
+                <p>{{ publicacion['contenido'] }}</p>
+                {% endif %}
+                {% if publicacion['foto'] %}
+                <img src="{{ url_for('static', filename=publicacion['foto']) }}" alt="Post Image" class="post-image">
+                {% endif %}
+                <div class="post-actions">
+                    <button><i class="fa-solid fa-thumbs-up"></i> Me gusta</button>
+                    <button><i class="fa-solid fa-comment"></i> Comentar</button>
+                    <button><i class="fa-solid fa-share"></i> Compartir</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        </section>
+        
+        <aside class="sidebar-right">
+            <section class="sponsored">
+                <h3>Patrocinado</h3>
+                <div class="ad">
+                    <img src="{{ url_for('static', filename='img/anunciofacebook.jpg') }}" alt="Anuncio">
+                    <p>Servicios online <a href="#">onlineservices.com</a></p>
+                </div>
+            </section>
+            <section class="contacts">
+                <h3>Contactos</h3>
+                {% if amigos %}
+                    {% for amigo in amigos %}
+                    <div class="contact-item">
+                        <img src="{{ url_for('static', filename='img/historia_2.jpg') }}" alt="Contacto">
+                        <p>{{ amigo['Nombres'] }} {{ amigo['Apellidos'] }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No tienes amigos aceptados aún.</p>
+                {% endif %}
+            </section>
+        </aside>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/cardmenu.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/historias.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook - solicitudes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-left">
+            <img src="{{ url_for('static', filename='img/logo_facebook.jfif') }}" alt="Facebook Logo" class="logo">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Buscar en Facebook">
+            </div>
+        </div>
+        <div class="navbar-center">
+            <a href="{{ url_for('inicio') }}" class="nav-icon active"><i class="fa-solid fa-house"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-tv"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-store"></i></a>
+            <a href="{{ url_for('solicitudes') }}" class="nav-icon"><i class="fa-solid fa-user"></i></a>
+            <a href="#" class="nav-icon"><i class="fa-solid fa-gamepad"></i></a>
+        </div>
+        <div class="navbar-right">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-brands fa-facebook-messenger"></i>
+            <i class="fa-solid fa-bell"></i>
+            <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Perfil" class="profile-pic" onclick="opencard()">
+        </div>
+        <div class="card-profile" id="cardwrap">
+            <div class="menu">
+                <div class="profile-menu">
+                <img src="{{ url_for('static', filename='img/logo_facebook.jfif') }}" alt="profile">
+                <p>#</p>
+            </div>
+            </div>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>meta businness suite</p>
+                <span>></span>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>setting y privacy</p>
+                <span>></span>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>help y suporrt</p>
+                <span>></span>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>display and accesibility</p>
+                <span>></span>
+            </a>
+            <a href="#" class="card-menu">
+                <img src="../img/logo_facebook.jfif" alt="meta">
+                <p>give feedback</p>
+            </a>
+        </div>
+    </header>
+    <main class="container1">
+        <!-- Sidebar izquierdo -->
+        <aside class="sidebar-left1">
+            <section class="menu-section1">
+                <div class="menu-item1">
+                    <img src="{{ url_for('static', filename='img/logo_facebook.jfif') }}" alt="Logo Facebook">
+                    <p>Inicio</p>
+                </div>
+                <hr style="color: black;width: 100%;">
+                <a href="{{ url_for('amigos') }}" class="menu-item-link" style="text-decoration: none;">
+                    <div class="menu-item">
+                        <i class="fa-solid fa-user-friends"></i>
+                        <p style="color: black;">Amigos</p>
+                    </div>
+                </a>
+                <div class="menu-item1">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <p>Eventos</p>
+                </div>
+                <div class="menu-item1">
+                    <i class="fa-solid fa-users"></i>
+                    <p>Grupos</p>
+                </div>
+                <div class="menu-item1">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <p>Empleos</p>
+                </div>
+            </section>
+        </aside>
+    
+        <!-- Área central: Solicitudes de amistad -->
+        <section class="main-content">
+            <h1>Solicitudes de Amistad</h1>
+            {% if solicitudes %}
+                <ul>
+                    {% for solicitud in solicitudes %}
+                    <li>
+                        <strong>{{ solicitud['nombre_emisor'] }} {{ solicitud['apellido_emisor'] }}</strong>
+                        (Fecha: {{ solicitud['fecha_solicitud'] }}) - Estado: {{ solicitud['estado'] }}
+                        {% if solicitud['estado'] == 'pendiente' %}
+                        <div class="solicitud-actions">
+                            <form method="POST" action="/solicitud/aceptar/{{ solicitud['id_solicitud'] }}" style="display:inline;">
+                                <button type="submit" class="solicitud-button aceptar">Aceptar</button>
+                            </form>
+                            <form method="POST" action="/solicitud/rechazar/{{ solicitud['id_solicitud'] }}" style="display:inline;">
+                                <button type="submit" class="solicitud-button rechazar">Rechazar</button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No tienes solicitudes de amistad pendientes.</p>
+            {% endif %}
+        </section>
+    
+        <!-- Sidebar derecho: Sugerencias de amistad -->
+        <aside class="sidebar-right">
+            <h2>Sugerencias de Amistad</h2>
+            {% if sugerencias %}
+                <ul>
+                    {% for sugerencia in sugerencias %}
+                    <li>
+                        <strong>{{ sugerencia['Nombres'] }} {{ sugerencia['Apellidos'] }}</strong>
+                        <form method="POST" action="/enviar_solicitud/{{ sugerencia['id'] }}" style="display:inline;">
+                            <button type="submit" class="solicitud-button enviar">Enviar Solicitud</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No hay sugerencias de amistad disponibles.</p>
+            {% endif %}
+        </aside>
+    </main>
+    
+    <script src="{{ url_for('static', filename='js/cardmenu.js') }}"></script>
+</body>
+</html>
